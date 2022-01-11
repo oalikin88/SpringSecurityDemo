@@ -4,12 +4,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.training.aos.springsecuritydemo.developer.Developer;
+import ru.training.aos.springsecuritydemo.model.Developer;
 
 @RestController
 @RequestMapping("/api/v1/developers")
@@ -28,5 +31,16 @@ public class DeveloperRestControllerV1 {
 	@GetMapping("/{id}")
 	public Developer getById(@PathVariable Long id) {
 		return DEVELOPERS.stream().filter(e -> e.getId().equals(id)).findFirst().orElse(null);
+	}
+	
+	@PostMapping
+	public Developer create(@RequestBody Developer developer) {
+		this.DEVELOPERS.add(developer);
+		return developer;
+	}
+	
+	@DeleteMapping("/{id}")
+	public void delete(@PathVariable Long id) {
+		this.DEVELOPERS.removeIf(e -> e.getId().equals(id));
 	}
 }

@@ -1,4 +1,4 @@
-package ru.training.aos.springsecuritydemo.developer;
+package ru.training.aos.springsecuritydemo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
